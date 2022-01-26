@@ -1,6 +1,6 @@
 
 def cls 
-	system "cls"
+	system "cls" or system "clear"
 end
 
 def print_set(set) 
@@ -16,8 +16,6 @@ def print_set(set)
 		d.close
 
 	end
-	puts set.to_s
-	# print print_dice
 end
 
 
