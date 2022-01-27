@@ -61,12 +61,12 @@ end
 					
  	
 # Delete dices from set
-
-			for i in 1..5 do
+								# variant
+			for i in 1..5 do			# for i in reroll do
 				if reroll.include?(i)
 
-					set.delete_at(i-1)
-				end
+					set.delete_at(i-1)	# set.delete_at(i-1)
+				end				# end
 			end
 
  # Reroll selected dices
