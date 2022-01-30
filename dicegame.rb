@@ -7,7 +7,6 @@ def print_set(set)
   	file_path = File.dirname(__FILE__)
   	 
 	cls
-	print_dice = []
 	set.sort!
 	set.each do |x|
 
@@ -42,41 +41,28 @@ end
 
 		when "Y" 
 			puts "OK"
-
+			sleep 2
 
 # Select dices for reroll
 
 		when "N"
-			puts "Select dices for reroll(numbers without space): "
+			puts "Select dices for reroll(input numbers without space): "
+			ww = false
+			until ww = true
+				
 				reroll =gets.chomp
-
+					if reroll.count("1-5") == reroll.length
+						ww = true
+					end
+			end
 				# Нужна проверка, что введены цифры 1..5 без лишних символов.
 
-					puts "Input numbers of dice without space"
+
 					
 					reroll = reroll.split("").map(&:to_i)
-				
-					
-
-					
- 	
-# Delete dices from set
-								# variant
-			for i in 1..5 do			# for i in reroll do
-				if reroll.include?(i)
-
-					set.delete_at(i-1)	# set.delete_at(i-1)
-				end				# end
-			end
-
- # Reroll selected dices
-
-			(reroll.length).times do
-	
-				dice = rand(1..6)
-
-				set << dice # put to set
-			end
+			#reroll selecteed dices	
+					reroll.each {|i| set[i-1] = dice}
+					sleep 2
 		else 
 			puts "'Y' or 'N' only"
 		end
