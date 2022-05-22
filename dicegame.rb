@@ -3,76 +3,90 @@ def cls
 	system "cls" or system "clear"
 end
 
+def dice
+	rand(1..6)
+end
+
 def print_set(set) 
   	file_path = File.dirname(__FILE__)
   	 
-	cls
 	set.sort!
 	set.each do |x|
-
 		d = File.new(file_path + "/data/#{x}.txt")
 		puts d.read
 		d.close
-
 	end
 end
 
+def reroll_dices(set)
 
-# roll the 5 dices
-	set = []
-	5.times do
-		dice = rand(1..6)
-		set << dice
-	end
+	reroll_ask = nil
 
-# Print result of roll
-
-	print_set(set) 
-	
-# This is ok? N for reroll
-	a = nil
-
-	until a =="Y" || a =="N"
+	until reroll_ask =="Y" || reroll_ask =="N"
  
-		puts "This is OK? Y/N"
-		a=gets.chomp.upcase
+		puts "Do you want to reroll dices? Y/N"
+		reroll_ask=gets.chomp.upcase
 
-		case a
+		case reroll_ask
 
-		when "Y" 
+		when "N" 
 			puts "OK"
 			sleep 2
 
 # Select dices for reroll
 
-		when "N"
+		when "Y"
 			puts "Select dices for reroll(input numbers without space): "
 			ww = false
-			until ww = true
-				
-				reroll =gets.chomp
+			until ww == true
+						
+				reroll = gets.chomp
 					if reroll.count("1-5") == reroll.length
 						ww = true
+					else
+						puts "Input numbers 1-5 only:"
 					end
 			end
-				# Нужна проверка, что введены цифры 1..5 без лишних символов.
-
-
-					
-					reroll = reroll.split("").map(&:to_i)
-			#reroll selecteed dices	
+				
+					reroll = reroll.split('').map(&:to_i)
+			#reroll selected dices	
 					reroll.each {|i| set[i-1] = dice}
 					sleep 2
+			# print_set(set)
+			# reroll_dices(set)		
 		else 
-			puts "'Y' or 'N' only"
+			puts "Input 'Y' or 'N' only"
 		end
+	
 	end
 
-# Print result
+
+
+
+
+
+	return set
+end
+
+# roll the 5 dices
+	set = []
+	5.times do
+		set << dice
+	end
+
+# Print result of roll
+	puts "Your combination:"
+	print_set(set) 
 	
+# This is ok? reroll
+	
+reroll_dices(set)
+		
+# Print final result
+cls
+	puts "Final result:"
 	print_set(set)
-
-
+	
  # Считаем комбинацию. #todo
 
 
